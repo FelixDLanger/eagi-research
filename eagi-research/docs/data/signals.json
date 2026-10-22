@@ -1,6 +1,0 @@
-{
-  "generated": null,
-  "lookback_years": 3,
-  "firms": [],
-  "note": "Placeholder. Once the weekly refresh is switched on (README, 'Weekly refresh of the outside-view screen'), the publishing workflow replaces this file with SEC filing-metadata signals for the firms in 03_tool/signals/watchlist.csv."
-}
