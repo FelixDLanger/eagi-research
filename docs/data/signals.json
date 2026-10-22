@@ -1,6 +1,841 @@
 {
-  "generated": null,
-  "lookback_years": 3,
-  "firms": [],
-  "note": "Placeholder. Once the weekly refresh is switched on (README, 'Weekly refresh of the outside-view screen'), the publishing workflow replaces this file with SEC filing-metadata signals for the firms in 03_tool/signals/watchlist.csv."
+ "generated": "2026-10-22T11:22:26Z",
+ "source": "SEC EDGAR submissions API (data.sec.gov)",
+ "lookback_years": 3,
+ "lookback_start": "2023-10-22",
+ "definitions": "Mirror EAGI_pipeline v13.0 cells 5e–5f; see refresh_signals.py",
+ "note": "Descriptive screen of compelled, mechanical disclosures (ladder rung 4). Flags are not scores and not forecasts; the IT-control material-weakness indicator is excluded because it failed validation.",
+ "firms": [],
+ "skipped": [
+  {
+   "ticker": "",
+   "cik": "1800",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "2488",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "6281",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "6951",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "10795",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "14272",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "16918",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "18230",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "21344",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "21665",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "24741",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "26172",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "27419",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "29989",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "32604",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "37996",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "40533",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "40545",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "40704",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "47217",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "49826",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "50863",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "51143",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "55785",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "56873",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "59478",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "60667",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "63908",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "64040",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "66740",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "68505",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "76334",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "77476",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "78003",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "80424",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "87347",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "93410",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "96021",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "97476",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "97745",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "100885",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "101829",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "104169",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "106040",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "107263",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "200406",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "277135",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "277948",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "310158",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "310764",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "313616",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "315189",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "318154",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "319201",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "320187",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "354950",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "702165",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "707549",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "712515",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "715957",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "723125",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "731766",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "732712",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "732717",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "745732",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "764180",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "764478",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "769397",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "773840",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "789019",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "796343",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "797468",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "804328",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "813672",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "821189",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "827054",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "829224",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "858877",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "866787",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "882095",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "883241",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "885725",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "891103",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "896878",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "898173",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "909832",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "936468",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "946581",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1002047",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1018724",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1024478",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1035002",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1035267",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1041061",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1045609",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1045810",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1048286",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1048911",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1053507",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1058090",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1058290",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1059556",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1063761",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1065088",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1065280",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1075531",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1090727",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1091667",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1101239",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1103982",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1108524",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1109357",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1120193",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1123360",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1133421",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1136869",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1136893",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1137789",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1141391",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1163165",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1166691",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1261333",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1262039",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1283699",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1286681",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1297996",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1318605",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1321655",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1326801",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1327567",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1327811",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1335258",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1341439",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1373715",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1403161",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1404655",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1413329",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1437107",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1441816",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1447669",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1467373",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1467858",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1477333",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1478242",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1506307",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1510295",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1534701",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1535527",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1551152",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1551182",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1561550",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1571949",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1571996",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1585689",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1596532",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1601046",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1613103",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1633917",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1637459",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1640147",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1645590",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1650372",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1660134",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1713683",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1730168",
+   "reason": "ValueError"
+  },
+  {
+   "ticker": "",
+   "cik": "1744489",
+   "reason": "ValueError"
+  }
+ ]
 }
