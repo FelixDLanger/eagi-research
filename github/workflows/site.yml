@@ -1,0 +1,72 @@
+name: Publish site
+
+# Publishes docs/ to GitHub Pages (Settings → Pages → Source: GitHub Actions):
+#   - on every push to main that changes the site or this workflow;
+#   - every Monday, when the weekly refresh is switched on: it first rewrites docs/data/signals.json
+#     from SEC EDGAR submissions metadata for the firms in 03_tool/signals/watchlist.csv, then deploys.
+# Switch the refresh on with the repository variable SEC_REFRESH_ENABLED = true and the repository
+# secret SEC_USER_AGENT = "Your Name your@email" (SEC fair-access policy).
+# The site is deployed by this workflow, not from a branch, because commits pushed with the
+# GITHUB_TOKEN do not trigger a branch-based GitHub Pages build.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/site.yml"
+  schedule:
+    - cron: "17 3 * * 1"   # Mondays 03:17 UTC
+  workflow_dispatch: {}
+
+permissions:
+  actions: read
+  contents: write          # keep the refreshed signals file in the repository
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: ${{ github.event_name != 'schedule' || vars.SEC_REFRESH_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out
+        uses: actions/checkout@v6
+
+      - name: Refresh SEC disclosure signals
+        if: ${{ github.event_name != 'push' && vars.SEC_REFRESH_ENABLED == 'true' }}
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: python3 03_tool/signals/refresh_signals.py --watchlist 03_tool/signals/watchlist.csv --out docs/data/signals.json
+
+      - name: Keep the refreshed file in the repository
+        if: ${{ github.event_name != 'push' && vars.SEC_REFRESH_ENABLED == 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/signals.json
+          if git diff --cached --quiet; then
+            echo "signals unchanged"
+          else
+            git commit -m "Refresh SEC disclosure signals"
+            git push || echo "::warning::Could not push the refreshed signals file; the site is deployed with it anyway."
+          fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

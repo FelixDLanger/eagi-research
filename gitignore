@@ -1,0 +1,28 @@
+# Caches — large, regenerable, and partly redistribution-restricted
+eagi_cache/
+**/txt_*.txt
+**/sub_*.json
+**/facts_*.json
+.eagi_ua.txt
+.eagi_company_tickers.json
+
+# Credentials — never commit
+*.key
+.env
+secrets.json
+
+# Local scratch
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.DS_Store
+
+# Large source data — never committed
+data/raw/
+data/interim/
+*.parquet.bak
+
+# Tool build
+node_modules/
+03_tool/node_modules/
+package-lock.json
