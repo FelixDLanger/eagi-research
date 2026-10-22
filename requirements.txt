@@ -1,0 +1,13 @@
+pandas>=2.0
+numpy>=1.24
+statsmodels>=0.14
+beautifulsoup4>=4.12
+lxml>=4.9
+pyarrow>=14.0
+openpyxl>=3.1
+requests>=2.31
+tqdm>=4.66
+matplotlib>=3.7
+
+# No estimator package is required. Two-way fixed effects and Callaway-Sant Anna
+# are implemented in the notebook and validated against explicit benchmarks.
