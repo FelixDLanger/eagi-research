@@ -1,0 +1,466 @@
+========================================================================
+RUN SUMMARY — ONE PIPELINE, TWO PAPERS
+generated 2026-08-12 14:37
+shared sample: 950 firm-years · 167 firms · 2019–2025 · panel DERIVED from CCAOF tables
+fiscal-year alignment: fiscal-year labels reconciled from SEC period-end dates: 0/171 firms (0%) required the Jan–May prior-year convention
+panel hash (reproducibility): 736040245229 · frozen copy panel_frozen.parquet
+REPRODUCIBILITY: seed=42 · deterministic rule classifier is PRIMARY · LLM second classifier not run
+  LLM labels are cached to llm_techcom_labels.csv and ship with the replication package,
+  so reruns are identical whether or not the API is reachable.
+
+########################################################################
+DECLARED ANALYSIS HIERARCHY (fixed before estimation; multiplicity is the main threat
+to a programme this size — every result is defensible alone, the SET needs a structure)
+########################################################################
+  PRIMARY   (1 test per paper · 5% threshold, no adjustment needed)
+    P1: CI → ROA, between-firm, industry+year FE, controls
+    P2: EAGI instrument reliability (α, split-half) — a measurement claim, not an effect
+  SECONDARY (pre-specified · Bonferroni within family)
+    P1: within-firm estimate · inverted-U shape · dimension-level · P1-H3 dispersion
+    P2: H1 levels (3 outcomes → p<0.0167) · H2 moderation · H3 variance battery
+  EXPLORATORY (hypothesis-generating; report effect sizes, not significance verdicts)
+    P1-H3b directional · P1-H3c quintiles · P1-H3d fit-to-potential · composite structure
+    compliance channel · AI control and probe · ERP signals · long horizon · pre-shock
+  Anything in the exploratory tier that survives should be RE-TESTED on new data, not
+  promoted within this one.
+
+########################################################################
+PAPER 1 — CIAOF: Core Integrity adherence and firm outcomes
+########################################################################
+Construct: published composite 'ccai_equal' · KPI α=0.299
+Claim: firms with higher Core Integrity adherence achieve better outcomes;
+originally specified as an inverted-U (an interior optimum in adherence).
+------------------------------------------------------------------------
+  CI variance decomposition: between-firm sd=0.0736 · within-firm sd=0.0189 · between share of variance=94%
+  CCAOF revisited (year FE) — CI between beta=-0.1522 (p=0.159) · within beta=-0.2411 (p=0.035)
+  CCAOF revisited (INDUSTRY x YEAR FE) — CI between beta=-0.1883 (p=0.099) · within beta=-0.1473 (p=0.163) · industries=10
+    sector composition explains -24% of the raw between-firm coefficient
+    per-1sd(between) ROA effect with industry FE = -0.0139
+    inverted-U tested BETWEEN firms: b1=-0.2621 b2=+0.2639 (p=0.364) · not concave at conventional levels → no inverted-U claim
+    CAUTION: between-firm estimates are descriptive. Disciplined firms differ in age,
+    M&A history, estate complexity and industry; reverse causality (profits fund
+    discipline) is unresolved. Report as association, not effect.
+  CI robustness (ccai_pca): between beta=-0.1271 (p=0.196) · within beta=-0.0878 (p=0.352)
+Structure of the composite — weakest link · complementarity · importance · necessity:
+  A WEAKEST LINK · mean-only β=-0.0101 (p=0.275) · min-only β=-0.0106 (p=0.529)
+     both entered: β_mean=-0.0157 (p=0.277) · β_min=+0.0202 (p=0.561)
+  A2 CEILING · max-only β=-0.0079 (p=0.056)
+     all three entered: mean=+0.0412 (p=0.053) · min=-0.0240 (p=0.463) · max=-0.0217 (p=0.000)
+     ⚠ mean/min/max are ORDER STATISTICS OF THE SAME FIVE NUMBERS (corr mean-min=+0.76, mean-max=+0.92). Entering all three
+       together is near-collinear: signs can flip between the single-regressor and
+       joint specifications. Read the SINGLE-regressor results as primary and treat the
+       joint decomposition as indicative only.
+     MIN wins  → a FLOOR binds: enforce a minimum per dimension, not an aggregate target.
+     MAX wins  → a CEILING logic: one strong dimension carries the firm; the rest are
+                 hygiene and need only be adequate.
+     MEAN wins → dimensions are substitutable and an aggregate score is defensible.
+     all null  → the composite has no internal structure worth encoding in the tool.
+  B COMPLEMENTARITY · 10 pairwise interactions: 6 positive, 0 significant at 5%
+     mostly POSITIVE ⇒ dimensions reinforce each other ⇒ spread HURTS (contradicts H3);
+     mostly null ⇒ dimensions are separable ⇒ selective allocation is coherent.
+  C IMPORTANCE (Shapley share of explained variance; model R²=0.304):
+       data_harmonization          56.3%
+       api_integration             31.3%
+       ops_automation               8.6%
+       modular_extensibility        3.2%
+       standardization              0.6%
+     these are DEFENSIBLE weights to replace equal weighting — but they are
+     sample-specific and must be reported as such, never as universal constants.
+  D NECESSITY · 5th percentile of each dimension, all firms vs HIGH-ROA firms:
+       standardization            all=-0.57 high-ROA=-0.57 lift=+0.00
+       data_harmonization         all=-0.22 high-ROA=-0.22 lift=+0.00
+       api_integration            all=-0.20 high-ROA=-0.20 lift=+0.00
+       modular_extensibility      all=-0.29 high-ROA=-0.29 lift=+0.00
+       ops_automation             all=-0.50 high-ROA=-0.53 lift=-0.03
+     a large lift means high performers are never found below that level ⇒ necessary
+     condition (prerequisite), which is a different claim from average contribution.
+  TRANSFER to structural governance · mean β=-0.1325 (p=0.011) · min β=+0.0000 (p=0.939)
+     FIT-TO-POTENTIAL on governance (complexity proxies ['size', 'lev', 'rnd', 'size_cx', 'lev_cx', 'rnd_cx', 'aux_n_tokens'], R²=0.102): β_|gap|=+0.0244 (p=0.746)
+     NEGATIVE ⇒ governance mismatched to complexity costs in BOTH directions:
+     bureaucracy in simple firms, chaos in complex ones. That is a sharper claim
+     than 'more governance is better' and it is what the tool should encode.
+     the EAGI TEXT index cannot carry this framing: a gap between two noise draws
+     is still noise (α=-0.06). Fit-to-potential transfers to STRUCTURE, not to text.
+     the text index cannot support dimension analysis (terms do not co-move);
+     the structural index can, and that is where the EAGI transfer lands.
+P1-H3 — allocation, not level (does SELECTIVE adherence beat UNIFORM adherence?):
+  dimensions used (k=5): ['standardization_kpi', 'data_harmonization_kpi', 'api_integration_kpi', 'modular_extensibility_kpi', 'ops_automation_kpi']
+  dispersion residualised on level and level² · corr(level, raw disp)=+0.849 → corr(level, residual disp)=+0.000
+  P1-H3 between-firm: β_level=-0.0126 (p=0.207) · β_DISPERSION=-0.0282 (p=0.131) n=945
+  P1-H3 shape in dispersion: b1=-0.0196 b2=-0.0233 (p=0.066) · vertex=-0.421 OUTSIDE the 5–95% range → not an interior optimum
+  corner comparison (raw means — descriptive only, no controls):
+                                mean  count
+    hl             hd                      
+    high-adherence SELECTIVE  0.0679    189
+                   uniform    0.0757    282
+    low-adherence  SELECTIVE  0.1001    282
+                   uniform    0.0568    192
+  P1-H3 interaction (dispersion × differentiation potential): β=+0.1086 (p=0.318)
+    positive ⇒ selectivity pays more where there is more to differentiate on —
+    the empirical content of the matrix, and the case for an architect in the loop.
+  P1-H3c adherence QUINTILES (adjusted ROA vs Q1_lowest_adh, industry+year FE) — Q1 = LOWEST adherence, Q5 = HIGHEST:
+      Q1_lowest_adh: +0.0000 (reference)   ← highest
+      Q2: -0.0273 (p=0.040)
+      Q3: -0.0165 (p=0.200)
+      Q4: -0.0063 (p=0.682)
+      Q5_highest_adh: -0.0392 (p=0.013)
+    observed adherence range: -0.36 to +7.39 (z units) — claims are limited to this range.
+    multiplicity: 4 contrasts vs the reference → Bonferroni 5% is p<0.0125; 0/4 survive.
+    ⇒ NO contrast survives adjustment: quintile differences are small and
+      non-monotonic. Report as 'no reliable gradient', not as a shape claim.
+    ⇒ the HIGHEST-adherence quintile is not the best (Q1_lowest_adh is). Within the
+      more adherence is not monotonically better — and this is shown WITHOUT
+      imposing a quadratic, so it is not a vertex artefact.
+  P1-H3b DIRECTIONAL pattern (technical hygiene minus process standardisation): β=-0.0061 (p=0.414) n=945
+    decomposed: β_hygiene=-0.0153 (p=0.150) · β_process_std=+0.0038 (p=0.630)
+    predicted: β_hygiene > 0 (technical deviation is debt) and β_process_std ≤ 0
+    (process deviation is where differentiation legitimately lives).
+    SENSITIVITY (roles reversed): β=+0.0061 (p=0.414) — by construction the mirror image; report both so the theoretical assignment is visible, not hidden.
+  P1-H3d FIT-TO-POTENTIAL · expected adherence modelled from ['rnd', 'size', 'lev'] + industry (R²=0.261)
+    quadratic in the GAP: b1=-0.0342 b2=+0.0066 (p=0.011) · not concave → no firm-specific optimum detected
+    distance from own level: β_|gap|=-0.0017 (p=0.859) — NEGATIVE ⇒ deviating in EITHER direction costs
+    raw ROA by gap quintile (descriptive, no controls):
+                    mean  count
+      gq                       
+      at level    0.0653    189
+      most over   0.0644    189
+      most under  0.0801    189
+      over        0.0800    189
+      under       0.0982    189
+    ATYPICALITY PLACEBO: β_|placebo gap|=+0.0089 (p=0.260)
+      ✓ placebo gap is null ⇒ the misfit reading survives the atypicality critique.
+    NOTE: an absolute-scale null is NOT evidence against a firm-specific optimum;
+    pooling firms with different feasible maxima flattens the curve by construction.
+    CIRCULARITY WARNING: 'expected' adherence is fitted from observables, so the gap
+    is a residual, not a normative target. It shows dispersion around peer-typical
+    behaviour — it cannot say what a firm SHOULD do. Only the workshops can.
+  CAVEAT: even H3b is a DIMENSION-level proxy. 'Differentiating on the right PROCESSES'
+  needs firm × process × treatment data, which no public source provides. That is the
+  data the TRVA workshops generate — the tool is the missing instrument, not a by-product.
+------------------------------------------------------------------------
+Paper 1 verdict (pre-publication — specify BOTH estimators up front, not as a revision):
+  Theorise adherence as a firm CHARACTERISTIC rather than a decision margin. Report the
+  within-firm estimate (clean identification, low power on a sticky construct) AND the
+  between-firm estimate (powered, confounded) as answering two different questions:
+    within  → does BECOMING more disciplined change outcomes?
+    between → do disciplined FIRMS perform differently?
+  The inverted-U is a shape claim and is therefore inherently cross-sectional; report it only
+  if concave AND the vertex lies inside the observed range (checked above).
+  Robustness: ccai_pca alternative composite (CI α is modest — show both).
+  Identification roadmap for the follow-up: firm-level ERP install-base exposure from an
+  EXTERNAL source (vendor-internal customer data would recreate the conflict CIAOF removed).
+
+########################################################################
+PAPER 2 — EAGI: EA governance disclosure, instrument and outcomes
+########################################################################
+Instrument: α=-0.062 · mean inter-item r=-0.008 · PC1 share=13.2%
+  independence benchmark for a 20-term mean = 0.224; observed sd = 0.137
+  terms in <5% of filings: ['architecture governance', 'architecture roadmap', 'target architecture', 'architecture review board', 'technical debt', 'legacy system retirement', 'platform consolidation', 'application rationalization', 'technology standardization', 'modernization roadmap', 'legacy decommissioning', 'event-driven architecture', 'api-first', 'technology governance', 'master data management', 'it governance', 'integration platform', 'systems consolidation', 'enterprise architecture']
+Term prevalence — the root cause (filing level vs firm-ever level):
+                         term  share_filings  share_firms_ever
+              data governance          0.077             0.152
+      enterprise architecture          0.018             0.029
+        systems consolidation          0.009             0.018
+                it governance          0.007             0.018
+         integration platform          0.008             0.018
+        technology governance          0.006             0.006
+                    api-first          0.005             0.006
+Instrument variants incl. FIRM-LEVEL aggregation (the CIAOF analogue for measurement):
+                variant  k  alpha  mean_r  split_half_r  spearman_brown    sd     level
+  full-doc·all20·binary 20 -0.025  -0.003         0.004           0.008 0.140 firm-year
+     section·all20·rate 20 -0.017  -0.004        -0.009          -0.019 0.111 firm-year
+   section·all20·binary 20 -0.018  -0.004        -0.010          -0.020 0.111 firm-year
+    full-doc·all20·rate 20 -0.062  -0.008        -0.030          -0.061 0.137 firm-year
+     full-doc·firm-EVER  8 -0.124  -0.014        -0.066          -0.142 0.336      firm
+    full-doc·firm-SHARE  8 -0.016  -0.002        -0.027          -0.055 0.351      firm
+      section·firm-EVER  5 -0.072  -0.014        -0.038          -0.079 0.435      firm
+     section·firm-SHARE  5 -0.062  -0.012        -0.032          -0.067 0.437      firm
+Item 106 staggered-deadline design (feasibility-gated):
+  FEASIBILITY OF THE STAGGERED DESIGN:
+    filer categories in panel: {'Large accelerated filer': np.int64(164)}
+    smaller / non-accelerated share: 0.0% → SRC stagger unusable (needs ≥10%)
+    FYE stagger: 103 firms first required in FY2023 · 63 in FY2024
+    distinct fiscal year ends: 33 (month distribution: {12.0: np.int64(103), 1.0: np.int64(16), 6.0: np.int64(8), 9.0: np.int64(7)})
+    post-period years available in the panel: 3
+    ⇒ DESIGN VIABLE. Estimating staggered DiD on the FYE cut.
+    timing-map validation — Item 106 present: pre=3.7% vs post=98.9%
+      a sharp jump confirms the map; a flat line means the map is wrong.
+    staggered DiD (ROA, firm+year FE): β_post106=+0.0003 p=0.978 n=945
+    staggered DiD (Q, firm+year FE): β_post106=-0.2275 p=0.276 n=931
+    CAUTION: with staggered adoption and firm+year FE, already-treated units act as
+    controls (Goodman-Bacon). With only two cohorts and a short post-period the bias
+    is limited, but state it — and prefer a Callaway–Sant'Anna estimator if extended.
+  SAMPLE COMPOSITION by filer status (for the external-validity paragraph):
+      Large accelerated filer                 164 firms  (99%)
+      nan                                       2 firms  (1%)
+    only 2 firms outside 'Large accelerated filer' — no usable heterogeneity split.
+    ⇒ EXTERNAL VALIDITY LIMIT: results describe large accelerated filers. State this
+      explicitly; do not generalise to mid-market or non-US firms, which is precisely
+      the gap the qualitative strand is designed to address.
+Customisation VOLUME (XBRL capitalised software) — the 2x2's missing variable:
+  XBRL capitalised-software coverage:
+      CapitalizedComputerSoftwareNet         40.7% of matched firm-years
+      CapitalizedComputerSoftwareGross       49.0% of matched firm-years
+      CapitalizedComputerSoftwareAdditions   16.7% of matched firm-years
+      PaymentsToDevelopSoftware              27.0% of matched firm-years
+      PaymentsForSoftware                     8.3% of matched firm-years
+      ANY tag present: 204 firm-years · 40 firms
+      coverage vs the panel's capsoft_intensity: 13% → 18%
+      coverage still under 30% — report as a limitation, not a test.
+Filing-metadata instruments (filing lag · NT 10-K · amendments · SIC · filer status):
+  FILING METADATA (all mandatory, all already cached):
+    filing lag (days, period end → filing): median=47 · p10=34 · p90=58 · n=1126
+    NT 10-K late notifications: 2 firm-years · 2 firms
+    10-K/A amendments:          39 firm-years · 22 firms
+    distinct 4-digit SIC codes: 77 · 2-digit groups: 37 (panel 'industry_raw' has 10)
+    filer categories: {'Large accelerated filer': np.int64(167)}
+    fiscal year ends: 32 distinct — the FILED value, replacing the
+      month heuristic used in the fiscal-year reconciliation.
+    filing lag(t−1) → ROA (FE on sic2): β=-0.00067 p=0.187 n=769
+      NEGATIVE ⇒ slower close predicts weaker performance. Interpret as
+      operational capability, not architecture per se — the two overlap,
+      and lag also reflects auditor and complexity effects.
+      corr(filing lag, mw_it) = +0.037
+      corr(filing lag, ev_restate_402) = +0.006
+Mandatory-disclosure instruments (audited ITGC weakness · Item 106 cyber governance):
+  MANDATORY-DISCLOSURE PREVALENCE (contrast with 0.7% for the voluntary lexicon):
+      mw_any                    99.2% of firm-years ·  99.4% of firms ever
+      mw_it                      2.0% of firm-years ·   4.8% of firms ever
+      mw_it_aff                  2.0% of firm-years ·   4.8% of firms ever
+      mw_it_incl                 2.0% of firm-years ·   4.8% of firms ever
+      icfr_not_effective         0.3% of firm-years ·   1.8% of firms ever
+      item106_present           42.0% of firm-years ·  99.4% of firms ever
+      cyber_board_committee      4.7% of firm-years ·  15.7% of firms ever
+      cyber_mgmt_expertise       7.3% of firm-years ·  22.9% of firms ever
+    Item 106 (mandatory FY2023+): present in 89.9% of post-2023 filings — a required disclosure, unlike the lexicon.
+    NEGATION-AWARE ITGC (bounds on the ambiguous residue):
+      proximity only (legacy)              β=-0.0507 p=0.001 n=769 · treated=1.3%
+      LOWER bound: affirmed only           β=-0.0507 p=0.001 n=769 · treated=1.3%
+      UPPER bound: affirmed + ambiguous    β=-0.0507 p=0.001 n=769 · treated=1.3%
+      unrestricted (boilerplate control)   β=+0.0325 p=0.220 n=769 · treated=99.5%
+      ⇒ BOUNDS AGREE: the ambiguous residue cannot change the
+        conclusion. No hand adjudication is required.
+      convergent: corr(affirmed ITGC, ICFR-not-effective) = -0.006 (independent wording, same underlying failure)
+    NEGATIVE β on an ITGC weakness is the predicted sign: audited control
+    failure in the system estate is governance failure made observable.
+    corr(text EAGI, ITGC weakness) = -0.029 — near zero would mean the two measure different things entirely.
+  8-K ITEM CODES (parsed from cached submissions — no network):
+      Item 1.05 cyber incident      4 firm-years ·   4 firms (mandatory FY2024+ only — descriptive, not a test)
+      Item 4.02 RESTATEMENT         1 firm-years ·   1 firms (full window — the usable one)
+      Item 2.06 impairment         24 firm-years
+      median 8-K filings/firm-year: 11
+      restatement(t-1) → ROA: β=-0.0371 p=0.008 n=769 · treated=0.1%
+        ⚠ SUPPRESSED: treated share under 1% — this estimate
+          rests on a handful of firm-years. Do not report it, and
+          do not report any correlation computed against it.
+    POWER CAVEAT: ITGC weaknesses are rare in large-cap panels. A low treated share
+    means limited power — report the share alongside any null so the reader can judge.
+Proximity lexicon (the middle layer between exact phrases and raw roots):
+  PROXIMITY LEXICON: 80 head x governance pairs, 14 retained (prevalence 5-95%)
+    reliability: alpha=0.220 - mean r=0.020 - split-half=0.189 - Spearman-Brown=0.318 - sd=0.300
+    mean prevalence of retained pairs: 17.3%
+      corr(prox index, filing length) = +0.078
+      corr(prox index, firm size) = +0.035
+      corr(prox index, placebo lexicon) = -0.044
+      corr(prox index, old 20-term index) = +0.185
+    => reliability still below 0.5; the middle layer does not rescue it either.
+Lexicon ceiling — deterministic bound on any keyword method:
+  LEXICON CEILING (deterministic bound on any keyword method):
+    LOWER bound — current 20-term lexicon, any term present: 13.0% of filings
+    UPPER bound — ANY domain root present:                   100.0% of filings
+    at least TWO distinct roots present:                     100.0% of filings
+    top roots by prevalence:
+      consolidat             100.0%
+      integrat               100.0%
+      governan               100.0%
+      platform                90.8%
+      architect               53.4%
+      modern                  52.8%
+      legacy                  51.2%
+      standardi               46.6%
+    root-based index reliability: α=0.580 · split-half=0.466 · Spearman-Brown=0.635
+    ⇒ CEILING IS HIGH and our phrasing captured less than half of it. The LEXICON
+      was too specific, not the corpus too thin. Rebuild the index on roots and
+      re-run reliability BEFORE considering any semantic method.
+      NOTE: the root index already reaches usable reliability — rebuild on it.
+    Reproducibility: fully deterministic. No API key, no model version, no drift.
+Measurement of last resort — semantic scoring and alternative corpus:
+  ALTERNATIVE CORPUS: no transcripts directory found — not testable here.
+  SEMANTIC SCORING: requires ANTHROPIC_API_KEY. Until it runs, 'absent from the
+    corpus' and 'missed by our keywords' remain observationally equivalent —
+    and that is the one open question a referee will press on Paper 2.
+------------------------------------------------------------------------
+H1 — within-firm FE(firm+year), firm-clustered SE · dep ~ EAGI(t−1) + controls
+  ROA  β=-0.0359  se=0.0291  p=0.217  per-1sd Δ=-0.0048  | DK p=0.061
+  Q    β=+1.9906  se=1.4933  p=0.183  per-1sd Δ=+0.2673  | DK p=0.000
+  SGA  β=+0.0358  se=0.0464  p=0.441  per-1sd Δ=+0.0048  | DK p=0.089
+H2 — centred interaction CI(t−1) × EAGI(t−1)
+  ROA  β_ixn=-0.3845  se=0.4186  p=0.358  per-1sd×1sd Δ=-0.0030
+  Q    β_ixn=+29.6472  se=17.8446  p=0.097  per-1sd×1sd Δ=+0.2278
+  SGA  β_ixn=+0.4751  se=0.5117  p=0.353  per-1sd×1sd Δ=+0.0037
+  ⚠ Q: clustered vs DK SEs differ 3.4× — T≈7 makes DK unreliable; use clustered.
+  ⚠ SGA: clustered vs DK SEs differ 2.2× — T≈7 makes DK unreliable; use clustered.
+Better-matched designs (sticky construct → between-firm; theory → adaptability):
+  index used: eagi_best
+  controls dropped for <70% coverage: ['capsoft'] (keeping them would have collapsed the sample)
+  BETWEEN (industry x year FE, firm-clustered): beta=-0.0560 se=0.0296 p=0.058 n=775
+  MUNDLAK: between beta=-0.0710 (p=0.035) · within beta=-0.0220 (p=0.395)
+    → if between is meaningful and within is noise, firm FE was discarding the signal.
+  SPLIT-HALF IV: first-stage F=3.28 (WEAK: halves do not predict each other → no common latent construct) · 2SLS beta=+0.4534 p=0.314
+  ADAPTABILITY raw (ROA volatility ~ mean EAGI, NO controls): beta=-0.0368 p=0.002 n=153
+  ADAPTABILITY controlled (+size, lev, rnd, industry): beta=-0.0475 p=0.003  → survives controls
+  SHOCK INTERACTION (EAGI x post-2020): beta=-0.0298 p=0.031  ⇒ higher-index firms performed WORSE after 2020
+  STRUCTURAL GOVERNANCE (techcom_verified+exec_cio+exec_cto+exec_cdo+exec_arch) → ROA: beta=-0.0150 p=0.070 n=775
+    corr(structural governance, eagi_best) = +0.076 (convergent validity for the text index)
+  LONG HORIZON (Δ ROA first→last, ≥3 yrs, n=142): initial eagi_best beta=+0.0691 p=0.053 · initial CI beta=-0.0777 p=0.664
+    (t−1→t may be too short a window for architecture payoffs)
+  EAGI mean by year (SEC cyber-disclosure Item 106 took effect FY2023 — watch for a jump): 2019=-0.007 2020=-0.005 2021=-0.006 2022=-0.016 2023=-0.003 2024=+0.009 2025=+0.016
+AI positive control + Paper 3 probe:
+  POSITIVE CONTROL — same corpus, same method, different construct:
+    AI lexicon (k=12): mean term prevalence 10.9% · α=0.511 · mean r=0.088 · Spearman-Brown=0.551
+    EA lexicon (k=20): mean term prevalence 0.7% · α=-0.062
+    ⇒ THE METHOD WORKS. The EA null is construct-specific, not method-specific.
+      This is the answer to 'you just used bad text analysis'.
+    arms available: ['ci_L', 'gov_s_L', 'eagi_mod_L']
+  PAPER 3 (i) ci_L → AI adoption: β=+1.2676 p=0.008 n=783
+  PAPER 3 (i) gov_s_L → AI adoption: β=+0.0102 p=0.747 n=783
+  PAPER 3 (i) eagi_mod_L → AI adoption: β=+0.0496 p=0.831 n=783
+  PAPER 3 (ii) AI × ci_L → ROA: β_ixn=+0.1908 p=0.014 | β_AI=+0.0219 (p=0.163)
+  PAPER 3 (ii) AI × gov_s_L → ROA: β_ixn=-0.0211 p=0.184 | β_AI=+0.0247 (p=0.101)
+  PAPER 3 (ii) AI × eagi_mod_L → ROA: β_ixn=-0.0131 p=0.767 | β_AI=+0.0248 (p=0.145)
+    β_ixn > 0 ⇒ AI adoption pays MORE where the architecture baseline is stronger —
+    i.e. architecture as the prerequisite for capitalising on AI. β_AI alone is adoption talk.
+Falsification of the AI results:
+           test                                                                     spec    beta     p   n
+    1 moderator                                                      AI x CI (construct)  0.1912 0.014 775
+    1 moderator                                             AI x PLACEBO (falsification) -0.0112 0.083 775
+      2 outcome                                                           CI -> AI index  1.2785 0.008 775
+      2 outcome                                                      CI -> PLACEBO index -0.7712 0.481 775
+      3 reverse                                                            AI(t-1) -> CI  0.0261 0.154 775
+     4 confound corr(AI,size)=-0.176 · corr(AI,aux_n_tokens)=-0.129 · corr(AI,ci)=+0.512     NaN   NaN 166
+       5 sector                                                       AI x CI, tech only  0.2000 0.040 231
+       5 sector                                                   AI x CI, non-tech only -0.4906 0.107 544
+  6 permutation                                                      AI x CI, 1000 draws  0.1912 0.248 775
+Variance battery · pre-shock design · 2x2 heterogeneity:
+  Variance battery (firm level, +controls +industry FE):
+    risk_measure regressor    beta     p   n
+             vol eagi_best -0.0360 0.032 142
+             vol        ci -0.1346 0.065 142
+             vol   placebo -0.0027 0.337 142
+         semidev eagi_best -0.1073 0.017 110
+         semidev        ci -0.1603 0.175 110
+         semidev   placebo -0.0079 0.032 110
+             mdd eagi_best  0.0969 0.007 142
+             mdd        ci  0.3663 0.018 142
+             mdd   placebo  0.0105 0.104 142
+           recov eagi_best -0.5823 0.440  99
+           recov        ci  0.5408 0.914  99
+           recov   placebo -0.4354 0.010  99
+    vol=SD of ROA · semidev=downside-only SD · mdd=deepest fall below running peak
+    recov=years back to prior peak (higher = slower recovery = worse)
+  RANDOMISATION INFERENCE (vol ~ eagi_best, 2000 permutations): observed β=-0.0360 · permutation p=0.157
+    a permutation p close to the analytic p means the result is not an artefact
+    of distributional assumptions; it does NOT address confounding.
+  PRE-SHOCK 2019→2020 (Δ ROA, industry FE, n=97): eagi_best β=+0.0147 p=0.678
+  PRE-SHOCK 2019→2020 (Δ ROA, industry FE, n=97): ci β=-0.2450 p=0.141
+    timing rules out reverse causality (a 2020 outcome cannot cause a 2019 measure);
+    selection on unobservables remains — this is stronger association, NOT causal.
+  2x2 HETEROGENEITY (CI × high-differentiation, R&D-intensity split, n=945): β_ixn=-0.5441 p=0.107 | β_CI(low-diff)=-0.3510 (p=0.034)
+    the grid predicts β_ixn < 0: standardisation should pay LESS where
+    differentiation intensity is high. This is the 2x2's testable content.
+H2 re-tested with a NON-TEXT moderator + formative-construct dimension analysis:
+  structural moderator: techcom_strict+exec_cio+exec_cto+exec_cdo+exec_arch · mean=0.34 · sd=0.57 · n=775
+  H2-structural (year FE): β_ixn=+0.0064 p=0.967 | β_CI=-0.1536 (p=0.207) | β_gov=-0.0140 (p=0.079)
+  H2-structural (industry+year FE): β_ixn=+0.1140 p=0.389 | β_CI=-0.1995 (p=0.065) | β_gov=-0.0158 (p=0.021)
+    reading: β_ixn > 0 ⇒ adherence pays MORE where governance capacity exists (the 'governed capacity to choose' proposition).
+    NOTE: the structural index is FORMATIVE — internal consistency (α) is not
+    the relevant validity test; criterion validity and dimension-level results are.
+  CIAOF dimension-level (between-firm, industry+year FE) — per_1sd is the
+  interpretable magnitude; raw betas are on each dimension's own scale — required because
+  the composite is formative and may average out opposing dimension effects:
+                        dimension  beta_between  sd_between  per_1sd     p   n
+       kpi_data_harmonization_kpi       -0.5018      0.0210  -0.0105 0.012 945
+          kpi_api_integration_kpi       -2.0390      0.0045  -0.0092 0.099 945
+    kpi_modular_extensibility_kpi       -0.3108      0.0233  -0.0072 0.288 945
+           kpi_ops_automation_kpi        0.0067      0.1385   0.0009 0.783 945
+          kpi_standardization_kpi       -0.0080      0.0154  -0.0001 0.985 945
+Compliance channel — is the visible vocabulary the meaningful one?
+  compliance terms ['data governance', 'master data management', 'it governance', 'technology governance']: prevalence 2.4% · α=-0.052 · mean r=-0.012
+  architecture terms (k=16): prevalence 0.3% · α=-0.031 · mean r=-0.009
+  regime break eagi_comp: post-2023 shift=+0.0888 (p=0.010)
+  regime break eagi_arch: post-2023 shift=-0.0106 (p=0.097)
+    → a break in compliance terms only ⇒ the vocabulary tracks MANDATES; a break in both ⇒ a general disclosure trend; neither ⇒ practice-driven.
+  roa_mean        ~ compliance β=-0.0170 (p=0.117) · architecture β=-0.0672 (p=0.178) · n=153
+  roa_worst_drop  ~ compliance β=+0.0163 (p=0.028) · architecture β=+0.1313 (p=0.001) · n=153
+    → 'roa_worst_drop' is the largest one-year ROA fall: LESS NEGATIVE is better.
+    → compliance significant on tail risk but not on the mean would support the
+      insurance/absorption reading over the profitability reading.
+Placebo falsification of the firm-level results:
+  outcome                      regressor    beta     p   n
+      vol          eagi_best (construct) -0.0478 0.009 153
+      vol                PLACEBO lexicon -0.0023 0.362 153
+    worst          eagi_best (construct)  0.1112 0.001 153
+    worst                PLACEBO lexicon  0.0103 0.058 153
+    worst AI index (different construct)  0.0216 0.234 153
+Construct-validity correlations: corr(index, size)=-0.203 · corr(index, placebo)=-0.054  ✓ distinct from size and placebo
+PRE-SPECIFIED PRIMARY SPEC (between-firm, industry+year FE, controls, ROA):
+  CI (Paper 1): β=-3.1716 p=0.022 n=958
+  EAGI (Paper 2): β=-0.9638 p=0.021 n=958
+Specification curve (all reasonable specs; fragile results must be shown as a distribution):
+  CI (Paper 1): 36 specs · median β=+0.6701 · range [-4.3707, +6.2039] · 44% significant · 56% positive
+  EAGI (Paper 2): 36 specs · median β=+0.0270 · range [-1.3527, +1.1341] · 25% significant · 53% positive
+Robustness (ROA):
+  leave-one-term-out β ∈ [-0.0523, +0.0044]
+  winsorized β=-0.0330 · t−2 β=-0.0509 · placebo β=+0.0044
+Convergent validity (within_firm = the variation FE exploits):
+         signal   n  pearson  spearman  within_firm
+   it_intensity 498    0.300     0.252       -0.090
+  ccai_textrich 942    0.127     0.055        0.041
+         gov_it 931    0.057     0.081       -0.011
+       n_tokens 942    0.018     0.049       -0.014
+Power: smallest detectable per-1sd ROA effect = +0.0109 (80% power)
+  attenuation-corrected at reliability -0.062: +1.0942
+  ⇒ NULL IS UNINFORMATIVE ABOUT THE ECONOMICS — predicted by the instrument alone.
+TechCom extreme-coding bounds on β(→ROA): [-0.0152, +0.0022] · ambiguous share 42.9%
+  null at both extremes → ambiguous cases cannot change the conclusion
+TechCom coding scenarios (raw regex · lower bound · upper bound):
+      definition                    scenario  share  switchers   n  beta_roa     se     p
+         techcom       raw regex (no triage)  0.198         40 781    0.0031 0.0115 0.789
+  techcom_strict  LOWER bound: review→reject  0.097         22 781   -0.0152 0.0133 0.254
+    techcom_incl UPPER bound: review→confirm  0.188         38 781    0.0022 0.0114 0.848
+Callaway-Sant'Anna (hand-rolled, not-yet-treated controls):
+  CALLAWAY-SANT'ANNA on techcom_strict: 18 clean switchers across 6 cohorts [2020, 2021, 2022, 2023, 2024, 2025]
+    => GATE HOLDS: fewer than 20 switchers or fewer than 2 cohorts. Reported as
+       descriptive only, exactly as pre-registered. CS adds nothing here.
+Event study — board TechCom formation:
+  Event-study FE (ROA), reference τ=−1, firm-clustered SE:
+      tau_m3   β=-0.0107  se=0.0449  p=0.811
+      tau_m2   β=-0.0084  se=0.0187  p=0.653
+      tau_p0   β=+0.0191  se=0.0143  p=0.181
+      tau_p1   β=+0.0165  se=0.0121  p=0.172
+      tau_p2   β=-0.0030  se=0.0150  p=0.843
+      tau_p3   β=-0.0016  se=0.0167  p=0.922
+      pre-trend check: smallest pre-period p-value = 0.653 (want all pre-period coefficients indistinguishable from zero)
+Lexicon context auto-labels: {'unclear': 1.0} (human coding sheet in OUT_DIR)
+------------------------------------------------------------------------
+Paper 2 verdict:
+  Report as a MEASUREMENT paper: a pre-registered disclosure index, a documented null, and
+  quantified evidence on whether 10-K language can carry the construct at all. Structural
+  measures (board technology committee, named CIO/CTO/Chief Architect) are the bridge to
+  a follow-up effects paper; repository telemetry serves as a tech-subsample validation.
+
+========================================================================
+SHARED ARTEFACTS
+  results: eagi_main_results.csv · eagi_loto.csv · panel_with_eagi.csv · eagi_results.xlsx
+  validation: techcom_evidence.csv · techcom_verified.csv · exec_tech_roles.csv · lexicon_validation_sheet.xlsx
+  instrument: eagi_instrument_variants.csv   →  all in /content/drive/MyDrive/ccaof-research/data/processed/eagi_out
+  Tool linkage: TRVA Navigator operationalises Paper 1 (CIAOF dimensions → archetype gating)
+  and consumes Paper 2's governance framing (governed capacity to choose deviations).
+  Empirical results require NO human coding: rules are primary, LLM labels are cached data.
+  Human coding is a QUALITATIVE FOLLOW-UP study (gold standard files are emitted for it).
+  (legacy note) Human tasks reduced to a GOLD STANDARD only: code techcom_goldstandard.csv (~45 rows) and a
+  slice of lexicon_validation_sheet.xlsx, save with a '_coded' suffix, re-run → κ is computed
+  automatically and machine labels are then defensible for the full corpus.
+Inference notes: SEs firm-clustered; H1 tests 3 outcomes → Bonferroni 5% is p<0.0167;
+  H2 main effects centred; capex unavailable → capitalised-software intensity substituted.
+========================================================================
