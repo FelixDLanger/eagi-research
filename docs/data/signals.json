@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-22T11:22:26Z",
+ "generated": "2026-10-26T09:17:45Z",
  "source": "SEC EDGAR submissions API (data.sec.gov)",
  "lookback_years": 3,
- "lookback_start": "2023-10-22",
+ "lookback_start": "2023-10-26",
  "definitions": "Mirror EAGI_pipeline v13.0 cells 5e–5f; see refresh_signals.py",
  "note": "Descriptive screen of compelled, mechanical disclosures (ladder rung 4). Flags are not scores and not forecasts; the IT-control material-weakness indicator is excluded because it failed validation.",
  "firms": [],
