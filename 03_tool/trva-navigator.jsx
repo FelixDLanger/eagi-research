@@ -1964,7 +1964,7 @@ export default function TRVANavigator() {
   return (
     <div className="root">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Serif+Display:ital@1&display=swap');
+        @import url('fonts/fonts.css');
         :root { --ink:#261C15; --esp:#3E2E20; --paper:#f5f2eb; --paper2:#ede9df; --gold:#c8a84b; --goldl:#e8d08a; --teal:#1a6b72; --teall:#2a9fa8; --red:#c0392b; --green:#1a7a4a; --muted:#6b6457; --bd:rgba(38,28,21,0.14); }
         .idxnote { border-left:3px solid var(--gold); background:var(--paper2); border-radius:8px; padding:10px 12px; }
         .opcard { display:flex; gap:10px; border:1px solid var(--bd); border-left:3px solid var(--muted); border-radius:10px; padding:10px 12px; background:var(--paper2); margin-bottom:8px; }
